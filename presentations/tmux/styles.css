@@ -1,0 +1,11 @@
+.no-support-message { display:none; }
+.impress-not-supported .no-support-message { display:block; }
+
+/* additional styles just to make things look a bit nicer */
+body { background: #ededed; font-size: 36px; font-family: Helvetica, Arial, "Lucida Grande", sans-serif; color: #333; }
+li { text-align: left; margin: 15px auto 15px auto }
+strong { font-family: monospace }
+.step { width: 800px; margin: 0px auto 50px auto; text-align: center; }
+.header { font-size: 48px; font-weight: bold; margin: 0px auto 50px auto; }
+.definition { font-weight: normal; font-style: italic; font-size: 48px; font-family: serif; }
+.conf-file { background: #333; color: #ededed; font-family: monospace; font-size: 22px; text-align: left; border: 10px solid #333 }

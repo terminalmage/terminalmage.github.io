@@ -1,0 +1,262 @@
+<!doctype html>
+<html>
+    <head>
+        <title>tmux, a terminal multiplexer</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">    
+        <link href="styles.css" rel="stylesheet" />
+    </head>
+    <body>
+        <div id="impress">
+            <div class="no-support-message">
+                Your browser doesn't support impress.js.  Try Chrome or Safari.
+            </div>
+
+            <!-- SLIDE 1 -->
+            <div class="step" data-x="0" data-y="0">
+                <div class="header">tmux, a terminal multiplexer</div>
+                <div>
+                    by Erik Johnson
+                </div>
+                <div>
+                    <br>20 February 2016
+                </div>
+            </div>
+
+            <!-- SLIDE 2 -->
+            <div class="step" data-x="2000" data-y="0">
+                <div class="header">multiplexer <span class="definition">(/mʌl'·ti·plek·sər/)</span></div>
+                <div>
+                    <ol>
+                        <li>A device that interleaves several activities; a switching device.</li>
+                        <li>(computing, telecommunications) A device that combines several input signals into a single output signal.</li>
+                    </ol>
+                </div>
+            </div>
+
+            <!-- SLIDE 3 -->
+            <div class="step" data-x="4000" data-y="0">
+                <div>
+                    tmux allows you to keep multiple virtual terminals in a single terminal window. It shows information about all of the windows in a status bar.
+                    <br><br>
+                    <img src="media/tmux01.png" width="600px">
+                </div>
+            </div>
+
+            <!-- SLIDE 4 -->
+            <div class="step" data-x="6000" data-y="0">
+                <div class="header">Hold on... this sounds a lot like GNU Screen!</div>
+                <div>
+                    It sure does! But it is so much more than that!
+                </div>
+            </div>
+
+            <!-- SLIDE 5 -->
+            <div class="step" data-x="8000" data-y="0">
+                <div class="header">tmux can do everything GNU Screen can do, and do it better</div>
+                <div style="font-size: 24px">
+                    <ul>
+                        <li>Like screen, there is a "copy mode", where text can be selected and copied to a buffer, and then pasted into another window.
+                            <ul>
+                                <li>tmux keeps a buffer history, remembering by default the last 20 times text was copied (can be tweaked with the <strong>buffer-limit</strong> option)</li>
+                                <li>In copy mode, tmux is capable of using both vi and emacs keybindings (emacs is the default). In screen, achieving emacs keybindings in copy mode must be done manually by changing keybindings and is hard to get right.</li>
+                            </ul>
+                        </li>
+                        <li>
+                            Like screen, tmux can monitor a window for activity, but tmux can also monitor a window for inactivity (tmux calls this "silence").
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- SLIDE 6 -->
+            <div class="step" data-x="10000" data-y="0">
+                <div class="header">Features specific to tmux</div>
+                <div style="font-size: 30px">
+                    <ul>
+                        <li>Window splitting (technically available in GNU Screen via an unofficial patch)</li>
+                        <li>Sessions can interact with one another. Windows can be moved between sessions for better organization.</li>
+                        <li>All tmux settings are scriptable. Any line that you would otherwise place in your tmux config file can be run from the shell by adding "tmux" before it. They can also be run directly (without the "tmux" before them) from within tmux using its command prompt.</li>
+                        <li>The configuration syntax, <em>especially</em> that of the status bar, is much easier to understand than GNU Screen's.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- SLIDE 7 -->
+            <div class="step" data-x="12000" data-y="0">
+                <div class="header">Terminology</div>
+                <div style="font-size: 24px">
+                    <ul>
+                        <li><strong>tmux server</strong> - All sessions run under the tmux server, and inter-session communication happens over a socket in <span style="font-family: monospace">/tmp/tmux-&lt;uid&gt;</span></li>
+                        <li><strong>session</strong> - Group of windows. Each has a unique ID, they count up from 0 but can be renamed to include non-numeric characters.</li>
+                        <li><strong>window</strong> - A numbered window inside a session</li>
+                        <li><strong>pane</strong> - An individual terminal inside a window</li>
+                        <li><strong>command prompt</strong> - a prompt you can launch where tmux commands can be run</li>
+                    </ul>
+                </div>
+                <div>
+                The server has one or more sessions, each session has one or more windows, each window has one or more panes.
+                </div>
+            </div>
+
+            <!-- SLIDE 8 -->
+            <div class="step" data-x="14000" data-y="0">
+                <div>
+                    <img src="media/tmux02.png" width="800px">
+                </div>
+            </div>
+
+            <!-- SLIDE 9 -->
+            <div class="step" data-x="16000" data-y="0">
+                <div class="header">The Prefix Key</div>
+                <div style="font-size: 28px">
+                    <ul>
+                        <li>A key or key combo (by default Ctrl-b) which when entered tells tmux that the next key/key combo is a tmux command.</li>
+                        <li>Entering <strong>prefix + ?</strong> will show the current keybindings.
+                            <ul>
+                                <li>This screen contains the tmux config syntax for each keybinding.</li>
+                                <li>Makes it easy to copy and paste into your tmux config file to make little tweaks to the configuration.</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- SLIDE 10 -->
+            <div class="step" data-x="18000" data-y="0">
+                <div class="header">Common Actions</div>
+                <div style="font-size: 28px">
+                    <ul>
+                        <li><strong>prefix + c</strong> - Add a new window</li>
+                        <li><strong>prefix + "</strong> - Split window "vertically"</li>
+                        <li><strong>prefix + %</strong> - Split window "horizontally"</li>
+                        <li><strong>prefix + d</strong> - Detach from session</li>
+                        <li><strong>prefix + &lt;digit&gt;</strong> - Switch to numbered window</li>
+                        <li><strong>prefix + w</strong> - Switch window by selecting from a list</li>
+                        <li><strong>prefix + s</strong> - Switch session by selecting from a list</li>
+                        <li><strong>prefix + l</strong> - Switch to last window used</li>
+                        <li><strong>prefix + ;</strong> - Switch to last pane used</li>
+                        <li><strong>prefix + :</strong> - Open the command prompt</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- SLIDE 11 -->
+            <div class="step" data-x="20000" data-y="0">
+                <div style="font-size: 30px">
+                    tmux refers to splitting in what I find to be a backward way. It considers <strong>prefix + %</strong> to be a <em>horizontal</em> split because it adds a vertical separator and the new pane is <em>located horizontally</em> to the active pane. I prefer to rebind these:
+                <br><br>
+                </div>
+                <div class="conf-file">
+                    # Change keybindings for window splitting so they make<br>
+                    # sense. Adding -c to make the new pane start in the<br>
+                    # current working directory.<br>
+                    unbind-key '"'<br>
+                    unbind-key %<br>
+                    bind-key _ split-window -c "#{pane_current_path}"<br>
+                    bind-key | split-window -h -c "#{pane_current_path}"<br>
+                </div>
+            </div>
+
+            <!-- SLIDE 12 -->
+            <div class="step" data-x="22000" data-y="0">
+                <div class="header">Copy Mode</div>
+                <div style="font-size: 24px">
+                    <ul>
+                        <li>Use <strong>prefix + [</strong> to enter copy mode. The keys used for movement, text selection, and copying while in this mode depend on the <strong>mode-keys</strong> setting. A full map of these keys can be found in the <strong>WINDOWS AND PANES</strong> section of the manpage. These bindings can be listed by running the tmux command <strong>list-keys -t vi-copy</strong> (or <strong>emacs-copy</strong>).</li>
+                        <li>Use <strong>prefix + ]</strong> to paste the most recently copied text.</li>
+                        <li>Use <strong>prefix + =</strong> to select from the buffer history. The selected buffer will be pasted after you hit <strong>Enter</strong>.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- SLIDE 13 -->
+            <div class="step" data-x="24000" data-y="0">
+                <div class="header">Commands</div>
+                <div>
+                    <ul>
+                        <li>Commands can do things like set configuration, resize panes, run shell commmands, etc.</li>
+                        <li>They can be bound to keys and executed using <strong>prefix + &lt;key&gt;</strong>, but they can also be run manually
+                            <ul>
+                                <li>Via the tmux command prompt</li>
+                                <li>From the shell (by adding "tmux" before them, i.e. <strong>tmux list-keys</strong>)</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- SLIDE 14 -->
+            <div class="step" data-x="26000" data-y="0">
+                <div class="header">The Status Line</div>
+                <div style="font-size: 24px">
+                    <ul>
+                        <li>The status line comes with some good information by default, but there are a lot of ways to customize it.</li>
+                        <li>The options starting with <strong>status-</strong> in the manpage can be used to configure the status line.
+                            <ul>
+                                <li><strong>status-left</strong> and <strong>status-right</strong> set text that sits at the left and right of the status line</li>
+                                <li><strong>status-left-length</strong> and <strong>status-right-length</strong> set max widths for these items</li>
+                                <li><strong>status-justify</strong> controls the justification of the window list (default: <strong>left</strong>)</li>
+                            </ul>
+                        </li>
+                        <li>See the <strong>FORMATS</strong> section of the manpage for variables that can be used in the status line.
+                    </ul>
+                </div>
+            </div>
+
+            <!-- SLIDE 15 -->
+            <div class="step" data-x="28000" data-y="0">
+                <div class="header">Helpful Configuration Tweaks</div>
+                <div class="conf-file" style="font-size: 17px">
+                    # enable 256 color mode<br>
+                    set-option -g default-terminal "screen-256color"<br>
+                    <br>
+                    # vi keybindings in copy mode<br>
+                    set-window-option -g mode-keys vi<br>
+                    # vi keybindings in command prompt<br>
+                    set-option -g status-keys vi<br>
+                    <br>
+                    # enable utf-8<br>
+                    set-window-option -g utf8 on<br>
+                    set-option -g status-utf8 on<br>
+                    <br>
+                    # start window/pane numbering at 1 instead of 0<br>
+                    set-option -g base-index 1<br>
+                    set-option -g pane-base-index 1<br>
+                    <br>
+                    # Automatically renumber windows<br>
+                    set-option -g renumber-windows on<br>
+                    <br>
+                    # toggle activity monitoring in current window<br>
+                    bind-key m set-window-option monitor-activity\; display-message -F 'monitor-activity -> #{?monitor-activity,on,off}'<br>
+                </div>
+            </div>
+
+            <!-- SLIDE 16 -->
+            <div class="step" data-x="30000" data-y="0">
+                <div class="header">Further Reading</div>
+                <div style="font-size: 26px">
+                    <ul>
+                        <li><strong>man tmux</strong> - One of the easiest-to-read, most detailed manpages out there, and a great resource for learning tmux</li>
+                        <li><strong>#tmux</strong> - Official IRC channel on irc.freenode.net
+                        <li><a href="http://tmux.github.io/" target="_blank" alt="Official Website">http://tmux.github.io/</a> - Official website</li>
+                        <li><a href="https://pragprog.com/book/bhtmux/tmux" target="_blank" alt="tmux book">tmux: Productive Mouse-Free Development</a> - Electronic/physical book
+                            <ul>
+                                <li>Ebook has been revised twice, but only covers features up to version 1.8 (current release as of Feb. 2016 is 2.1)</li>
+                                <li>Last revised in April 2014</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- SLIDE 17 -->
+            <div class="step" data-x="32000" data-y="0">
+                <div class="header"><span style="font-size: 96px">The End</span></div>
+            </div>
+
+        </div>
+        <script type="text/javascript" src="impress.js"></script>
+        <!-- call `impress().init()` function to initialize impress.js presentation.  -->
+        <script>impress().init();</script>
+    </body>
+</html>
